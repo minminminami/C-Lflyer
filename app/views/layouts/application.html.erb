@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>C&Lflyer</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-logo">
+        <% if @current_user %>
+          <%= link_to("/users/#{@current_user.id}") do %>
+            <img src="logo.PNG">
+          <% end %>
+        <% else %>
+          <%= link_to("/") do %>
+            <img src="logo.PNG">
+          <% end %>
+        <% end %>
+      </div>
+      <ul class="header-menus">
+        <% if @current_user %>
+          <li><!-- 現在ログイン中のユーザー -->
+            <%= link_to("/users/#{@current_user.id}") do %>
+              <img src="<%= @current_user.image_name %>">
+            <% end %>
+          </li>
+          <li><!-- 投稿一覧 -->
+            <%= link_to("/posts/index") do %>
+              <i class="fas fa-home"></i>
+            <% end %>
+          </li>
+          <li><!-- 新規投稿 -->
+            <%= link_to("/posts/new") do %>
+              <i class="fas fa-pen"></i>
+            <% end %>
+          </li>
+          <li><!-- ログアウト -->
+            <%= link_to("/logout", {method: "post"}) do %>
+              <i class="fas fa-sign-out-alt"></i>
+            <% end %>
+          </li>
+
+          <!-- <li><%= link_to("ユーザー一覧", "/users/index") %></li> -->
+        <% else %>
+
+        <% end %>
+      </ul>
+    </header>
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

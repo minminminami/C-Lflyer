@@ -1,0 +1,32 @@
+<div class="main posts-new">
+  <div class="container">
+    <h1 class="form-heading">投稿する</h1>
+    <div class="form">
+      <div class="form-body">
+        <% @post.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>
+
+        <%= form_tag("/posts/create") do %>
+        <p>コンサート・ライブ名</p>
+        <input name="live_name" value="<%= @post.live_name %>">
+        <p>日にち（例: 2019/01/06）</p>
+        <input name="day" value="<%= @post.day %>">
+        <p>時間　（例: 18:00開場, 18:30開演）</p>
+        <input name="time" value="<%= @post.time %>">
+        <p>場所　（住所やコンサートホール名、ライブハウス名）</p>
+        <input name="place" value="<%= @post.place %>">
+        <p>チケット代</p>
+        <input name="money" value="<%= @post.money %>">
+        <p>内容や注意事項</p>
+        <textarea name="content"><%= @post.content %></textarea>
+        <p>お問い合わせ</p>
+        <input name="contact" value="<%= @post.contact %>">
+        <input type="submit" value="投稿">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
